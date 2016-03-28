@@ -1,0 +1,13 @@
+set nocompatible
+
+let s:root = expand('<sfile>:p:h')
+execute 'set runtimepath& runtimepath+=' . fnameescape(s:root)
+
+echo 'Step1. ' . autest#a#call1('success')
+
+" The following direct call is OK
+echo 'Step2. ' . autest#a#call2('fail')
+
+" But the following redirect call invokes
+" E127: Cannot redefine function autest#b#call: It is in use
+echo autest#a#call1('fail')
